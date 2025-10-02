@@ -59,7 +59,7 @@ Before deploying, ensure you have:
    ```
    mysql://root:ABcd1234XYZ@containers.railway.app:7856/railway?sslmode=require
    ```
-
+<!-- mysql://root:mEGdGEJnnnsrGLPfECJinkVXZGwVpsAy@mysql.railway.internal:3306/railway?sslmode=require -->
 ---
 
 ## 🚀 Step 3: Deploy Your Application
@@ -138,25 +138,31 @@ Instead of copying manually:
 
 ## 🔧 Step 5: Configure Build & Start Commands
 
-Railway should auto-detect, but verify:
+Railway should auto-detect from `railway.toml` and `nixpacks.toml` files!
+
+✅ **Configuration files included**:
+- `railway.toml` - Railway-specific config
+- `nixpacks.toml` - Build configuration
+
+If you need to manually configure:
 
 1. Click on your **web service**
 2. Go to **"Settings"** tab
 3. Scroll to **"Build & Deploy"** section
 
-**Build Command**:
+**Build Command** (if needed):
 ```bash
-npm install && npx prisma generate && npx prisma migrate deploy && npm run build
+npm ci && npx prisma generate && npx prisma migrate deploy && npm run build
 ```
 
-**Start Command**:
+**Start Command** (if needed):
 ```bash
 npm start
 ```
 
-**Install Command** (should auto-detect):
+**Watch Command** (development):
 ```bash
-npm install
+npm run dev
 ```
 
 ---
