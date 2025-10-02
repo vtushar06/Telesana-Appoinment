@@ -2,16 +2,16 @@ services:
   # Web Service (Next.js Application)
   - type: web
     name: telesana-app
-    env: node
+    runtime: node
     region: oregon # Change to your preferred region
-    plan: starter # free tier
-    buildCommand: ./render-build.sh
+    plan: free
+    buildCommand: chmod +x ./render-build.sh && ./render-build.sh
     startCommand: npm start
     envVars:
       - key: NODE_VERSION
-        value: 20.11.0
+        value: "20"
       - key: DATABASE_URL
-        sync: false # Set this in Render dashboard
+        sync: false # Set this in Render dashboard or link to database below
       - key: NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
         sync: false # Set this in Render dashboard
       - key: CLERK_SECRET_KEY
@@ -29,9 +29,8 @@ services:
       - key: NODE_ENV
         value: production
 
-# Database can be created separately in Render
-# Recommended: Use Render's PostgreSQL or MySQL database service
-databases:
-  - name: telesana-db
-    databaseName: telesana
-    plan: starter # free tier
+# Optional: Uncomment to create a PostgreSQL database with your app
+# databases:
+#   - name: telesana-db
+#     databaseName: telesana
+#     user: telesana
