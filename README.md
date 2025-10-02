@@ -408,23 +408,27 @@ npm run lint            # Run ESLint
 
 ## 🚀 Deployment
 
-### Deploy to Render
+### Deploy to Railway (Recommended for MySQL) 🚂
 
-This project is configured for easy deployment on Render:
+This project works best with Railway for MySQL support:
 
-1. **Quick Deploy**: See [RENDER_DEPLOYMENT.md](./RENDER_DEPLOYMENT.md) for complete guide
+1. **Quick Deploy**: See [RAILWAY_DEPLOYMENT.md](./RAILWAY_DEPLOYMENT.md) for complete guide
 2. **Requirements**:
-   - MySQL/PostgreSQL database
+   - MySQL database (native support on Railway)
    - Clerk API keys
    - (Optional) Vonage API for video calls
 
-3. **One-Click Setup**:
+3. **Simple Setup**:
    - Push to GitHub
-   - Connect to Render
-   - Configure environment variables
+   - Connect Railway account
+   - Provision MySQL database
    - Deploy! 🎉
 
-**Detailed deployment guide**: [RENDER_DEPLOYMENT.md](./RENDER_DEPLOYMENT.md)
+**Detailed deployment guide**: [RAILWAY_DEPLOYMENT.md](./RAILWAY_DEPLOYMENT.md)
+
+### Alternative: Deploy to Render (PostgreSQL)
+
+For PostgreSQL deployment: [RENDER_DEPLOYMENT.md](./RENDER_DEPLOYMENT.md)
 
 ---
 

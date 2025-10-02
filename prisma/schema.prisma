@@ -58,7 +58,7 @@ model Appointment {
 
   @@index([status, startTime])
   @@index([doctorId, startTime])
-  @@index([patientId], map: "Appointment_patientId_fkey")
+  @@index([patientId])
 }
 
 model CreditTransaction {
@@ -70,7 +70,7 @@ model CreditTransaction {
   createdAt DateTime        @default(now())
   user      User            @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@index([userId], map: "CreditTransaction_userId_fkey")
+  @@index([userId])
 }
 
 model Payout {
