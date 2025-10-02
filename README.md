@@ -406,6 +406,28 @@ npm run lint            # Run ESLint
 
 ---
 
+## 🚀 Deployment
+
+### Deploy to Render
+
+This project is configured for easy deployment on Render:
+
+1. **Quick Deploy**: See [RENDER_DEPLOYMENT.md](./RENDER_DEPLOYMENT.md) for complete guide
+2. **Requirements**:
+   - MySQL/PostgreSQL database
+   - Clerk API keys
+   - (Optional) Vonage API for video calls
+
+3. **One-Click Setup**:
+   - Push to GitHub
+   - Connect to Render
+   - Configure environment variables
+   - Deploy! 🎉
+
+**Detailed deployment guide**: [RENDER_DEPLOYMENT.md](./RENDER_DEPLOYMENT.md)
+
+---
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please follow these steps:
