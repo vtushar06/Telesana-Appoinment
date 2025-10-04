@@ -4,5 +4,5 @@ buildCommand = "npm ci && npx prisma generate && npx prisma migrate deploy && np
 
 [deploy]
 startCommand = "npm start"
-restartPolicyType = "on-failure"
+restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 10
