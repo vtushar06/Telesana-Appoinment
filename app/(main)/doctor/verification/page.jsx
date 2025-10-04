@@ -25,20 +25,20 @@ export default async function VerificationPage() {
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="max-w-2xl mx-auto">
-        <Card className="border-emerald-900/20">
+        <Card className="border-gray-200">
           <CardHeader className="text-center">
             <div
               className={`mx-auto p-4 ${
-                isRejected ? "bg-red-900/20" : "bg-amber-900/20"
+                isRejected ? "bg-red-50" : "bg-amber-50"
               } rounded-full mb-4 w-fit`}
             >
               {isRejected ? (
-                <XCircle className="h-8 w-8 text-red-400" />
+                <XCircle className="h-8 w-8 text-red-600" />
               ) : (
-                <ClipboardCheck className="h-8 w-8 text-amber-400" />
+                <ClipboardCheck className="h-8 w-8 text-amber-600" />
               )}
             </div>
-            <CardTitle className="text-2xl font-bold text-white">
+            <CardTitle className="text-2xl font-bold text-gray-900">
               {isRejected
                 ? "Verification Declined"
                 : "Verification in Progress"}

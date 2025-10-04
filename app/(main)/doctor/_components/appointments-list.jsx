@@ -21,10 +21,10 @@ export default function DoctorAppointmentsList() {
   const appointments = data?.appointments || [];
 
   return (
-    <Card className="border-emerald-900/20">
+    <Card className="border-gray-200">
       <CardHeader>
-        <CardTitle className="text-xl font-bold text-white flex items-center">
-          <Calendar className="h-5 w-5 mr-2 text-emerald-400" />
+        <CardTitle className="text-xl font-bold text-gray-900 flex items-center">
+          <Calendar className="h-5 w-5 mr-2 text-blue-600" />
           Upcoming Appointments
         </CardTitle>
       </CardHeader>
@@ -47,7 +47,7 @@ export default function DoctorAppointmentsList() {
         ) : (
           <div className="text-center py-8">
             <Calendar className="h-12 w-12 mx-auto text-muted-foreground mb-3" />
-            <h3 className="text-xl font-medium text-white mb-2">
+            <h3 className="text-xl font-medium text-gray-900 mb-2">
               No upcoming appointments
             </h3>
             <p className="text-muted-foreground">

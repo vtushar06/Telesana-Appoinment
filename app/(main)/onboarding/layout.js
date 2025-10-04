@@ -30,10 +30,10 @@ export default async function OnboardingLayout({ children }) {
     <div className="container mx-auto px-4 py-12">
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-10">
-          <h1 className="text-3xl font-bold text-white mb-2">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">
             Welcome to Telesana
           </h1>
-          <p className="text-muted-foreground text-lg">
+          <p className="text-gray-600 text-lg">
             Tell us how you want to use the platform
           </p>
         </div>

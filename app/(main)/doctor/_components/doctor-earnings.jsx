@@ -77,73 +77,73 @@ export function DoctorEarnings({ earnings, payouts = [] }) {
     <div className="space-y-6">
       {/* Earnings Overview */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Card className="border-emerald-900/20">
+        <Card className="border-gray-200">
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-muted-foreground">
                   Available Credits
                 </p>
-                <p className="text-3xl font-bold text-white">
+                <p className="text-3xl font-bold text-gray-900">
                   {availableCredits}
                 </p>
                 <p className="text-xs text-muted-foreground">
                   ${availablePayout.toFixed(2)} available for payout
                 </p>
               </div>
-              <div className="bg-emerald-900/20 p-3 rounded-full">
-                <Coins className="h-6 w-6 text-emerald-400" />
+              <div className="bg-blue-100 p-3 rounded-full">
+                <Coins className="h-6 w-6 text-blue-600" />
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="border-emerald-900/20">
+        <Card className="border-gray-200">
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-muted-foreground">This Month</p>
-                <p className="text-3xl font-bold text-white">
+                <p className="text-3xl font-bold text-gray-900">
                   ${thisMonthEarnings.toFixed(2)}
                 </p>
               </div>
-              <div className="bg-emerald-900/20 p-3 rounded-full">
-                <TrendingUp className="h-6 w-6 text-emerald-400" />
+              <div className="bg-blue-100 p-3 rounded-full">
+                <TrendingUp className="h-6 w-6 text-blue-600" />
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="border-emerald-900/20">
+        <Card className="border-gray-200">
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-muted-foreground">
                   Total Appointments
                 </p>
-                <p className="text-3xl font-bold text-white">
+                <p className="text-3xl font-bold text-gray-900">
                   {completedAppointments}
                 </p>
                 <p className="text-xs text-muted-foreground">completed</p>
               </div>
-              <div className="bg-emerald-900/20 p-3 rounded-full">
-                <Calendar className="h-6 w-6 text-emerald-400" />
+              <div className="bg-blue-100 p-3 rounded-full">
+                <Calendar className="h-6 w-6 text-blue-600" />
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="border-emerald-900/20">
+        <Card className="border-gray-200">
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-muted-foreground">Avg/Month</p>
-                <p className="text-3xl font-bold text-white">
+                <p className="text-3xl font-bold text-gray-900">
                   ${averageEarningsPerMonth.toFixed(2)}
                 </p>
               </div>
-              <div className="bg-emerald-900/20 p-3 rounded-full">
-                <BarChart3 className="h-6 w-6 text-emerald-400" />
+              <div className="bg-blue-100 p-3 rounded-full">
+                <BarChart3 className="h-6 w-6 text-blue-600" />
               </div>
             </div>
           </CardContent>
@@ -151,31 +151,31 @@ export function DoctorEarnings({ earnings, payouts = [] }) {
       </div>
 
       {/* Payout Section */}
-      <Card className="border-emerald-900/20">
+      <Card className="border-gray-200">
         <CardHeader>
-          <CardTitle className="text-xl font-bold text-white flex items-center">
-            <CreditCard className="h-5 w-5 mr-2 text-emerald-400" />
+          <CardTitle className="text-xl font-bold text-gray-900 flex items-center">
+            <CreditCard className="h-5 w-5 mr-2 text-blue-600" />
             Payout Management
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           {/* Current Payout Status */}
-          <div className="bg-muted/20 p-4 rounded-lg border border-emerald-900/20">
+          <div className="bg-muted/20 p-4 rounded-lg border border-gray-200">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="text-lg font-medium text-white">
+              <h3 className="text-lg font-medium text-gray-900">
                 Available for Payout
               </h3>
               {pendingPayout ? (
                 <Badge
                   variant="outline"
-                  className="bg-amber-900/20 border-amber-900/30 text-amber-400"
+                  className="bg-amber-50 border-amber-200 text-amber-600"
                 >
                   PROCESSING
                 </Badge>
               ) : (
                 <Badge
                   variant="outline"
-                  className="bg-emerald-900/20 border-emerald-900/30 text-emerald-400"
+                  className="bg-blue-100 border-blue-200 text-blue-600"
                 >
                   Available
                 </Badge>
@@ -187,19 +187,19 @@ export function DoctorEarnings({ earnings, payouts = [] }) {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
                   <div>
                     <p className="text-muted-foreground">Pending Credits</p>
-                    <p className="text-white font-medium">
+                    <p className="text-gray-900 font-medium">
                       {pendingPayout.credits}
                     </p>
                   </div>
                   <div>
                     <p className="text-muted-foreground">Pending Amount</p>
-                    <p className="text-white font-medium">
+                    <p className="text-gray-900 font-medium">
                       ${pendingPayout.netAmount.toFixed(2)}
                     </p>
                   </div>
                   <div>
                     <p className="text-muted-foreground">PayPal Email</p>
-                    <p className="text-white font-medium text-xs">
+                    <p className="text-gray-900 font-medium text-xs">
                       {pendingPayout.paypalEmail}
                     </p>
                   </div>
@@ -217,17 +217,17 @@ export function DoctorEarnings({ earnings, payouts = [] }) {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
                 <div>
                   <p className="text-muted-foreground">Available Credits</p>
-                  <p className="text-white font-medium">{availableCredits}</p>
+                  <p className="text-gray-900 font-medium">{availableCredits}</p>
                 </div>
                 <div>
                   <p className="text-muted-foreground">Payout Amount</p>
-                  <p className="text-white font-medium">
+                  <p className="text-gray-900 font-medium">
                     ${availablePayout.toFixed(2)}
                   </p>
                 </div>
                 <div>
                   <p className="text-muted-foreground">Platform Fee</p>
-                  <p className="text-white font-medium">
+                  <p className="text-gray-900 font-medium">
                     ${platformFee.toFixed(2)}
                   </p>
                 </div>
@@ -237,7 +237,7 @@ export function DoctorEarnings({ earnings, payouts = [] }) {
             {!pendingPayout && availableCredits > 0 && (
               <Button
                 onClick={() => setShowPayoutDialog(true)}
-                className="w-full mt-4 bg-emerald-600 hover:bg-emerald-700"
+                className="w-full mt-4 bg-blue-600 hover:bg-blue-700"
               >
                 Request Payout for All Credits
               </Button>
@@ -266,15 +266,15 @@ export function DoctorEarnings({ earnings, payouts = [] }) {
           {/* Payout History */}
           {payouts.length > 0 && (
             <div className="space-y-2">
-              <h3 className="text-lg font-medium text-white">Payout History</h3>
+              <h3 className="text-lg font-medium text-gray-900">Payout History</h3>
               <div className="space-y-2">
                 {payouts.slice(0, 5).map((payout) => (
                   <div
                     key={payout.id}
-                    className="flex items-center justify-between p-3 rounded-md bg-muted/10 border border-emerald-900/10"
+                    className="flex items-center justify-between p-3 rounded-md bg-muted/10 border border-gray-200"
                   >
                     <div>
-                      <p className="text-white font-medium">
+                      <p className="text-gray-900 font-medium">
                         {format(new Date(payout.createdAt), "MMM d, yyyy")}
                       </p>
                       <p className="text-sm text-muted-foreground">
@@ -289,8 +289,8 @@ export function DoctorEarnings({ earnings, payouts = [] }) {
                       variant="outline"
                       className={
                         payout.status === "PROCESSED"
-                          ? "bg-emerald-900/20 border-emerald-900/30 text-emerald-400"
-                          : "bg-amber-900/20 border-amber-900/30 text-amber-400"
+                          ? "bg-blue-100 border-blue-200 text-blue-600"
+                          : "bg-amber-50 border-amber-200 text-amber-600"
                       }
                     >
                       {payout.status}
@@ -307,7 +307,7 @@ export function DoctorEarnings({ earnings, payouts = [] }) {
       <Dialog open={showPayoutDialog} onOpenChange={setShowPayoutDialog}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle className="text-xl font-bold text-white">
+            <DialogTitle className="text-xl font-bold text-gray-900">
               Request Payout
             </DialogTitle>
             <DialogDescription>
@@ -321,11 +321,11 @@ export function DoctorEarnings({ earnings, payouts = [] }) {
                 <span className="text-muted-foreground">
                   Available credits:
                 </span>
-                <span className="text-white">{availableCredits}</span>
+                <span className="text-gray-900">{availableCredits}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Gross amount:</span>
-                <span className="text-white">
+                <span className="text-gray-900">
                   ${(availableCredits * 10).toFixed(2)}
                 </span>
               </div>
@@ -333,11 +333,11 @@ export function DoctorEarnings({ earnings, payouts = [] }) {
                 <span className="text-muted-foreground">
                   Platform fee (20%):
                 </span>
-                <span className="text-white">-${platformFee.toFixed(2)}</span>
+                <span className="text-gray-900">-${platformFee.toFixed(2)}</span>
               </div>
-              <div className="border-t border-emerald-900/20 pt-2 flex justify-between font-medium">
-                <span className="text-white">Net payout:</span>
-                <span className="text-emerald-400">
+              <div className="border-t border-gray-200 pt-2 flex justify-between font-medium">
+                <span className="text-gray-900">Net payout:</span>
+                <span className="text-blue-600">
                   ${availablePayout.toFixed(2)}
                 </span>
               </div>
@@ -351,7 +351,7 @@ export function DoctorEarnings({ earnings, payouts = [] }) {
                 placeholder="your-email@paypal.com"
                 value={paypalEmail}
                 onChange={(e) => setPaypalEmail(e.target.value)}
-                className="bg-background border-emerald-900/20"
+                className="bg-background border-gray-200"
                 required
               />
               <p className="text-sm text-muted-foreground">
@@ -374,7 +374,7 @@ export function DoctorEarnings({ earnings, payouts = [] }) {
                 variant="outline"
                 onClick={() => setShowPayoutDialog(false)}
                 disabled={loading}
-                className="border-emerald-900/30"
+                className="border-blue-200"
               >
                 Cancel
               </Button>
