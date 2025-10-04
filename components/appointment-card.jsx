@@ -9,7 +9,6 @@ import {
   Calendar,
   Clock,
   User,
-  Video,
   Stethoscope,
   X,
   Edit,
@@ -30,7 +29,6 @@ import {
   addAppointmentNotes,
   markAppointmentCompleted,
 } from "@/actions/doctor";
-import { generateVideoToken } from "@/actions/appointments";
 import useFetch from "@/hooks/use-fetch";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
@@ -41,7 +39,7 @@ export function AppointmentCard({
   refetchAppointments,
 }) {
   const [open, setOpen] = useState(false);
-  const [action, setAction] = useState(null); // 'cancel', 'notes', 'video', or 'complete'
+  const [action, setAction] = useState(null); // 'cancel', 'notes', or 'complete'
   const [notes, setNotes] = useState(appointment.notes || "");
   const router = useRouter();
 
@@ -56,11 +54,6 @@ export function AppointmentCard({
     fn: submitNotes,
     data: notesData,
   } = useFetch(addAppointmentNotes);
-  const {
-    loading: tokenLoading,
-    fn: submitTokenRequest,
-    data: tokenData,
-  } = useFetch(generateVideoToken);
   const {
     loading: completeLoading,
     fn: submitMarkCompleted,
@@ -146,17 +139,6 @@ export function AppointmentCard({
     await submitNotes(formData);
   };
 
-  // Handle join video call
-  const handleJoinVideoCall = async () => {
-    if (tokenLoading) return;
-
-    setAction("video");
-
-    const formData = new FormData();
-    formData.append("appointmentId", appointment.id);
-    await submitTokenRequest(formData);
-  };
-
   // Handle successful operations
   useEffect(() => {
     if (cancelData?.success) {
@@ -193,31 +175,6 @@ export function AppointmentCard({
       }
     }
   }, [notesData, refetchAppointments, router]);
-
-  useEffect(() => {
-    if (tokenData?.success) {
-      // Redirect to video call page with token and session ID
-      router.push(
-        `/video-call?sessionId=${tokenData.videoSessionId}&token=${tokenData.token}&appointmentId=${appointment.id}`
-      );
-    } else if (tokenData?.error) {
-      setAction(null);
-    }
-  }, [tokenData, appointment.id, router]);
-
-  // Determine if appointment is active (within 30 minutes of start time)
-  const isAppointmentActive = () => {
-    const now = new Date();
-    const appointmentTime = new Date(appointment.startTime);
-    const appointmentEndTime = new Date(appointment.endTime);
-
-    // Can join 30 minutes before start until end time
-    return (
-      (appointmentTime.getTime() - now.getTime() <= 30 * 60 * 1000 &&
-        now < appointmentTime) ||
-      (now >= appointmentTime && now <= appointmentEndTime)
-    );
-  };
 
   // Determine other party information based on user role
   const otherParty =
@@ -407,36 +364,6 @@ export function AppointmentCard({
                     {appointment.patientDescription}
                   </p>
                 </div>
-              </div>
-            )}
-
-            {/* Join Video Call Button */}
-            {appointment.status === "SCHEDULED" && (
-              <div className="space-y-2">
-                <h4 className="text-sm font-medium text-muted-foreground">
-                  Video Consultation
-                </h4>
-                <Button
-                  className="w-full bg-emerald-600 hover:bg-emerald-700"
-                  disabled={
-                    !isAppointmentActive() || action === "video" || tokenLoading
-                  }
-                  onClick={handleJoinVideoCall}
-                >
-                  {tokenLoading || action === "video" ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Preparing Video Call...
-                    </>
-                  ) : (
-                    <>
-                      <Video className="h-4 w-4 mr-2" />
-                      {isAppointmentActive()
-                        ? "Join Video Call"
-                        : "Video call will be available 30 minutes before appointment"}
-                    </>
-                  )}
-                </Button>
               </div>
             )}
 
