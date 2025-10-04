@@ -1,0 +1,5 @@
+# Railway Configuration
+# This file configures how Railway builds and deploys your app
+
+# Environment variables
+NIXPACKS_NO_CACHE=1
