@@ -11,6 +11,8 @@ const nextConfig = {
       },
     ],
   },
+  // Add this for Railway deployment
+  output: 'standalone', // Optimizes for production deployment
 };
 
 export default nextConfig;
