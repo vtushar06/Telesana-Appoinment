@@ -23,7 +23,7 @@ model User {
   description         String?             @db.Text
   verificationStatus  VerificationStatus? @default(PENDING)
   doctorAppointments  Appointment[]       @relation("DoctorAppointments")
-  // patientAppointments Appointment[]       @relation("PatientAppointments")
+  patientAppointments Appointment[]       @relation("PatientAppointments")
   availabilities      Availability[]
   transactions        CreditTransaction[]
   payouts             Payout[]
