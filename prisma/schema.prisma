@@ -1,27 +1,30 @@
+// Prisma ORM configuration for PostgreSQL database
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("DATABASE_URL") // Connection string from .env
 }
 
+// Main User model - handles patients, doctors, and admin roles
 model User {
-  id                  String              @id @default(uuid())
-  // clerkUserId         String              @unique
+  id                  String              @id @default(uuid()) // UUID for unique identification
   email               String              @unique
   name                String?
   imageUrl            String?
-  role                UserRole            @default(UNASSIGNED)
+  role                UserRole            @default(UNASSIGNED) // Role-based access control
   createdAt           DateTime            @default(now())
   updatedAt           DateTime            @updatedAt
-  credits             Int                 @default(2)
+  credits             Int                 @default(2) // Free credits for new users
+  // Doctor-specific fields
   specialty           String?
   experience          Int?
   credentialUrl       String?
   description         String?             @db.Text
   verificationStatus  VerificationStatus? @default(PENDING)
+  // Relations - One user can have multiple records
   doctorAppointments  Appointment[]       @relation("DoctorAppointments")
   patientAppointments Appointment[]       @relation("PatientAppointments")
   availabilities      Availability[]
@@ -29,6 +32,7 @@ model User {
   payouts             Payout[]
 }
 
+// Doctor availability slots for booking
 model Availability {
   id        String     @id @default(uuid())
   doctorId  String
@@ -37,9 +41,10 @@ model Availability {
   status    SlotStatus @default(AVAILABLE)
   doctor    User       @relation(fields: [doctorId], references: [id], onDelete: Cascade)
 
-  @@index([doctorId, startTime])
+  @@index([doctorId, startTime]) // Optimized queries for fetching doctor slots
 }
 
+// Appointment booking system
 model Appointment {
   id                 String            @id @default(uuid())
   patientId          String
@@ -49,23 +54,24 @@ model Appointment {
   status             AppointmentStatus @default(SCHEDULED)
   notes              String?           @db.Text
   patientDescription String?           @db.Text
-  videoSessionId     String?
+  videoSessionId     String?           // For video call integration
   videoSessionToken  String?
   createdAt          DateTime          @default(now())
   updatedAt          DateTime          @updatedAt
   doctor             User              @relation("DoctorAppointments", fields: [doctorId], references: [id])
   patient            User              @relation("PatientAppointments", fields: [patientId], references: [id])
 
-  @@index([status, startTime])
+  @@index([status, startTime]) // Fast queries by status and time
   @@index([doctorId, startTime])
   @@index([patientId])
 }
 
+// Credit system for appointment bookings
 model CreditTransaction {
   id        String          @id @default(uuid())
   userId    String
-  amount    Int
-  type      TransactionType
+  amount    Int             // Credits added/deducted
+  type      TransactionType // Purchase or deduction
   packageId String?
   createdAt DateTime        @default(now())
   user      User            @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -73,19 +79,20 @@ model CreditTransaction {
   @@index([userId])
 }
 
+// Doctor payout management
 model Payout {
   id          String       @id @default(uuid())
   doctorId    String
-  amount      Float
-  credits     Int
-  platformFee Float
-  netAmount   Float
-  paypalEmail String
+  amount      Float        // Total amount
+  credits     Int          // Credits being converted
+  platformFee Float        // Platform commission
+  netAmount   Float        // Amount after fee
+  paypalEmail String       // Payment destination
   status      PayoutStatus @default(PROCESSING)
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
-  processedAt DateTime?
-  processedBy String?
+  processedAt DateTime?    // When admin processed it
+  processedBy String?      // Admin who processed
   doctor      User         @relation(fields: [doctorId], references: [id], onDelete: Cascade)
 
   @@index([status, createdAt])

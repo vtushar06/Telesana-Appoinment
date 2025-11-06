@@ -1,18 +1,22 @@
+// Clerk authentication middleware - protects routes
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
+// Define routes that require authentication
 const isProtectedRoute = createRouteMatcher([
-  "/doctors(.*)",
-  "/onboarding(.*)",
-  "/doctor(.*)",
-  "/admin(.*)",
-  "/video-call(.*)",
-  "/appointments(.*)",
+  "/doctors(.*)",      // Doctor listings and profiles
+  "/onboarding(.*)",   // User onboarding flow
+  "/doctor(.*)",       // Doctor dashboard
+  "/admin(.*)",        // Admin panel
+  "/video-call(.*)",   // Video consultation
+  "/appointments(.*)", // Appointment management
 ]);
 
+// Middleware runs on every request
 export default clerkMiddleware(async (auth, req) => {
   const { userId } = await auth();
 
+  // Redirect to sign-in if not authenticated on protected routes
   if (!userId && isProtectedRoute(req)) {
     const { redirectToSignIn } = await auth();
     return redirectToSignIn();
